@@ -27,7 +27,7 @@ function getPlaces() {
 }
 
 function getReviews(id) {
-    return postgrePool.query('select * from nearbyplaces.review where placeid= $1,', [id])
+    return postgrePool.query('select * from nearbyplaces.review  x where x.placeid like $1,', [id])
     .then(result => {
         console.log(result);
         if (result.rows) {
