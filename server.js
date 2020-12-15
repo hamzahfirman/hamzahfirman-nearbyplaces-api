@@ -28,6 +28,11 @@ app.get('/places' , (request, response) => {
     db.getPlaces().then(x => response.json(x));
 })
 // METHOD: GET
+app.get('/reviews/:placeid' , (request, response) => {
+    let placeid = request.params.placeid;
+    db.getReviews(placeid).then(x => response.json(x));
+})
+// METHOD: GET
 app.get('/search/:searchTerm/:location' , (request, response) => {
 
     let searchBusiness = request.params.searchTerm.substring(0,1).toUpperCase() + 
@@ -59,6 +64,7 @@ app.post('/place', (request, response) =>{
 
     //Stores the given data from a user using a query function in db.js to 
     // 'place' table in postgres
+    
     db.savePlace(name, "" + address +", " + town + ", " + state + ", " + zip, type, phone, hours
     , town, state, totalReviews, cost, website, link).then(x => response.json({message: "The place is succesfully added."}))
 });

@@ -26,7 +26,21 @@ function getPlaces() {
     });
 }
 
-function savePlace(name, address, category, phone, hours) {
+function getReviews(id) {
+    return postgrePool.query('select * from nearbyplaces.review where placeid= $1,', [id])
+    .then(result => {
+        console.log(result);
+        if (result.rows) {
+            return result.rows;
+        } else {
+            throw Error('The places could not be found in the database.');
+        }
+    });
+}
+
+
+
+function savePlace(name, address, category, phone, hours, town, state, totalreview, price, website, link) {
     return postgrePool.query('INSERT into nearbyplaces.place (name, address, category, phone, hours, town, state, totalreview, price, website, link) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning id', [name, address, category, phone, hours, town, state, totalreview, price, website, link])
         .then(x => x.rows);
 }
@@ -54,4 +68,4 @@ function getSearchedPlace(place, town) {
         });
 }
 
-module.exports = { getPlaces, savePlace, saveReview, getSearchedPlace, addTotalReview }
+module.exports = { getPlaces, savePlace, saveReview, getSearchedPlace, addTotalReview, getReviews }
