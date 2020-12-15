@@ -30,12 +30,13 @@ app.get('/places' , (request, response) => {
 // METHOD: GET
 app.get('/search/:searchTerm/:location' , (request, response) => {
 
-    let searchBusiness = request.params.searchTerm;
+    let searchBusiness = request.params.searchTerm.substring(0,1).toUpperCase() + 
+    request.params.searchTerm.substring(1).toLowerCase()
     let searchLocation = request.params.location.substring(0,1).toUpperCase() + 
     request.params.location.substring(1).toLowerCase();
 
 
-    db.getSearchedPlace(searchBusiness+"%", searchLocation+"%").then(x => response.json(x));
+    db.getSearchedPlace("%"+searchBusiness+"%","%"+ searchLocation+"%").then(x => response.json(x));
 
 
 })
