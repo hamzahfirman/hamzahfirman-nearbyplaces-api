@@ -41,7 +41,7 @@ function getReviews(id) {
 
 
 function savePlace(name, address, category, phone, hours, town, state, totalreview, price, website, link) {
-    return postgrePool.query('insert into nearbyplaces.place (name, address, category, phone, hours, town, state, totalreview, price, website, link) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [name, address, category, phone, hours, town, state, totalreview, price, website, link])
+    return postgrePool.query('INSERT into nearbyplaces.place (name, address, category, phone, hours, town, state, totalreview, price, website, link) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) returning id', [name, address, category, phone, hours, town, state, totalreview, price, website, link])
         .then(x => x.rows);
 }
 
