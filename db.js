@@ -41,12 +41,12 @@ function getReviews(id) {
 
 
 function savePlace(name, address, category, phone, hours, town, state, totalreview, price, website, link) {
-    return postgrePool.query('INSERT into nearbyplaces.place (name, address, category, phone, hours, town, state, totalreview, price, website, link) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [name, address, category, phone, hours, town, state, totalreview, price, website, link])
+    return postgrePool.query('insert into nearbyplaces.place (name, address, category, phone, hours, town, state, totalreview, price, website, link) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [name, address, category, phone, hours, town, state, totalreview, price, website, link])
         .then(x => x.rows);
 }
 
 function saveReview(username, rating, comment, placeid) {
-    return postgrePool.query('INSERT into nearbyplaces.review (username, rating, comment, placeid) values ($1, $2, $3, $4) returning id', [username, rating, comment, placeid])
+    return postgrePool.query('insert into nearbyplaces.review (username, rating, comment, placeid) values ($1, $2, $3, $4) returning id', [username, rating, comment, placeid])
         .then(x => x.rows);
 }
 

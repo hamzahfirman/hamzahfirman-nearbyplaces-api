@@ -47,21 +47,21 @@ app.get('/search/:searchTerm/:location' , (request, response) => {
 })
 // METHOD: POST
 app.post('/place', (request, response) =>{
-    let name = request.body.name;
-    let address   = request.body.address;
-    let town    = request.body.town;
-    let state    = request.body.state;
-    let zip    = request.body.zip;
+    let name = request.body.place.name;
+    let address   = request.body.place.address;
+    let town    = request.body.place.town;
+    let state    = request.body.place.state;
+    let zip    = request.body.place.zip;
     let categories    = request.body.categories;
-    let cost    = request.body.cost;
-    let hours    = request.body.hours;
-    let link    = request.body.link;
+    let cost    = request.body.place.cost;
+    let hours    = request.body.place.hours;
+    let link    = request.body.place.link;
     let place    = request.body.place;
     let reviews    = request.body.reviews;
-    let type    = request.body.type;
-    let website   = request.body.website;
-    let totalReviews    = request.body.totalReviews;
-    let phone           = request.body.phone;
+    let type    = request.body.place.type;
+    let website   = request.body.place.website;
+    let totalReviews    = request.body.place.totalReviews;
+    let phone           = request.body.place.phone;
 
     //Stores the given data from a user using a query function in db.js to 
     // 'place' table in postgres
