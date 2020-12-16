@@ -7,7 +7,6 @@ const express = require('express');
 const app = express();
 var db = require('./db');
 var cors = require('cors'); // This gives access to public (whoever wants to use this API)
-var data = require('./data');
 var bodyParser = require('body-parser');
 const port = process.env.PORT || 3003; //'process.env.PORT' - Needed for production where a host can choose 
                                        // its own preference PORT for this API (Detail: Reads 'env' file and 
@@ -16,7 +15,7 @@ const port = process.env.PORT || 3003; //'process.env.PORT' - Needed for product
 // Middlewares
 app.use(cors()); 
 app.use(bodyParser.json()); // Converts into JSON 
-app.use(express.urlencoded({extended: true}));
+
 
 
 // METHOD: GET
@@ -47,6 +46,8 @@ app.get('/search/:searchTerm/:location' , (request, response) => {
 })
 // METHOD: POST
 app.post('/place', (request, response) =>{
+
+    try{
     let name = request.body.place.name;
     let address   = request.body.place.address;
     let town    = request.body.place.town;
@@ -68,6 +69,11 @@ app.post('/place', (request, response) =>{
     
     db.savePlace(name, "" + address +", " + town + ", " + state + ", " + zip, type, phone, hours, 
     town, state, totalReviews, cost, website, link).then(x => response.json({message: "The place is succesfully added."}))
+
+    }catch (e){
+        console.log(e.message);
+        request.status(500).send('Server Error');
+    }
 });
 
 // METHOD: POST
