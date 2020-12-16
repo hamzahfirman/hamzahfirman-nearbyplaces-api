@@ -42,7 +42,7 @@ app.get('/search/:searchTerm/:location' , (request, response) => {
 
 })
 // METHOD: POST
-app.post('/place', (request, response) =>{
+app.post('/place', (request, response) => {
 
     try{
     let name = request.body.place.name;
@@ -65,7 +65,7 @@ app.post('/place', (request, response) =>{
     // 'place' table in postgres
     
     db.savePlace(name, address, type, phone, hours, 
-    town, state, totalReviews, cost, website, link).then(x => response.json({message: "The place is succesfully added."}))
+    town, state, totalReviews, cost, website, link).then(x => response.json({message: "The place is succesfully added."}));
 
     }catch (e){
         console.log(e.message);
