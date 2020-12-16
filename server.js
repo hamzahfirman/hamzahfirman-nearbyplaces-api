@@ -61,12 +61,13 @@ app.post('/place', (request, response) =>{
     let type    = request.body.type;
     let website   = request.body.website;
     let totalReviews    = request.body.totalReviews;
+    let phone           = request.body.phone;
 
     //Stores the given data from a user using a query function in db.js to 
     // 'place' table in postgres
     
-    db.savePlace(name, "" + address +", " + town + ", " + state + ", " + zip, type, phone, hours
-    , town, state, totalReviews, cost, website, link).then(x => response.json({message: "The place is succesfully added."}))
+    db.savePlace(name, "" + address +", " + town + ", " + state + ", " + zip, type, phone, hours, 
+    town, state, totalReviews, cost, website, link).then(x => response.json({message: "The place is succesfully added."}))
 });
 
 // METHOD: POST
