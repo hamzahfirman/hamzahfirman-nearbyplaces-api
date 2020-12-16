@@ -5,17 +5,14 @@
 
 const express = require('express');
 const app = express();
-var db = require('./db');
-var cors = require('cors'); // This gives access to public (whoever wants to use this API)
-var bodyParser = require('body-parser');
-const port = process.env.PORT || 3003; //'process.env.PORT' - Needed for production where a host can choose 
-                                       // its own preference PORT for this API (Detail: Reads 'env' file and 
-                                       // looks for 'PORT' key to get the port number)
+const port = process.env.PORT || 3002;
+const db = require('./db');
 
-// Middlewares
-app.use(cors()); 
-app.use(bodyParser.json()); // Converts into JSON 
+const cors = require('cors');
+const bodyParser = require('body-parser');// Converts into JSON 
 
+app.use(cors());
+app.use(bodyParser.json());
 
 
 // METHOD: GET
@@ -67,7 +64,7 @@ app.post('/place', (request, response) =>{
     //Stores the given data from a user using a query function in db.js to 
     // 'place' table in postgres
     
-    db.savePlace(name, "" + address +", " + town + ", " + state + ", " + zip, type, phone, hours, 
+    db.savePlace(name, address, type, phone, hours, 
     town, state, totalReviews, cost, website, link).then(x => response.json({message: "The place is succesfully added."}))
 
     }catch (e){
